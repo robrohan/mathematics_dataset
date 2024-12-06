@@ -215,7 +215,7 @@ def sample_coefficients(degrees, entropy, min_non_zero=0, max_non_zero=None):
 
   for index, entry_entropy in zip(indices, entropies):
     value = number.integer(entry_entropy, signed=True, min_abs=1)
-    coeffs.itemset(index, value)
+    coeffs[index] = value
 
   return coeffs
 
@@ -258,7 +258,7 @@ def expand_coefficients(coefficients, entropy, length=None):
         value=coefficients.item(power),
         count=counts.item(power),
         entropy=coeffs_entropy.item(power))
-    expanded_coefficients.itemset(power, coeffs)
+    expanded_coefficients[power] = coeffs
 
   return expanded_coefficients
 
@@ -362,8 +362,8 @@ def coefficients_linear_split(coefficients, entropy):
   if random.choice([False, True]):
     a, b = b, a
 
-  coefficients_1 = np.zeros(coefficients.shape, dtype=np.object)
-  coefficients_2 = np.zeros(coefficients.shape, dtype=np.object)
+  coefficients_1 = np.zeros(coefficients.shape, dtype=object)
+  coefficients_2 = np.zeros(coefficients.shape, dtype=object)
 
   for index, coefficient in enumerate(coefficients):
     entropy_coeff = entropy_coefficients[index]
